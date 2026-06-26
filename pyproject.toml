@@ -4,13 +4,13 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "asktheboard"
-version = "0.2.0"
+version = "0.2.1"
 description = "A board of expert personas whose every decision is a pre-registered, time-anchored, reality-graded bet. BYOK; the board that keeps score, before the fact."
 readme = "README.md"
 requires-python = ">=3.10"
 license = "MIT"
 license-files = ["LICENSE"]
-authors = [{ name = "Dan Ilushin", email = "dilushin@chu6a.dev" }]
+authors = [{ name = "Dan Ilushin", email = "support@chu6a.dev" }]
 keywords = ["llm", "decision", "calibration", "brier", "adr", "byok", "board"]
 classifiers = [
     "Development Status :: 3 - Alpha",
@@ -27,7 +27,8 @@ dependencies = []
 dev = ["pytest>=7"]
 
 [project.urls]
-Homepage = "https://github.com/danilushin/asktheboard"
+Homepage = "https://danilushin.github.io/asktheboard/"
+Documentation = "https://danilushin.github.io/asktheboard/"
 Repository = "https://github.com/danilushin/asktheboard"
 Issues = "https://github.com/danilushin/asktheboard/issues"
 Changelog = "https://github.com/danilushin/asktheboard/blob/main/CHANGELOG.md"

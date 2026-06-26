@@ -4,6 +4,30 @@ All notable changes are documented here. This project follows
 [Semantic Versioning](https://semver.org/); before `1.0`, minor versions may
 introduce breaking changes.
 
+## [0.2.1] -- 2026-06-26
+
+### Added
+- README: a "Hosted tier -- join the waitlist" section (email capture). No code
+  or API changes -- engine behavior is identical to 0.2.0.
+- A self-contained landing page (`docs/index.html`) served via GitHub Pages at
+  https://danilushin.github.io/asktheboard/ -- linked from the README and the
+  PyPI project sidebar (`Documentation` / `Homepage` URLs).
+- An animated terminal demo (`docs/demo.svg`, dependency-free SMIL/CSS) of
+  `create -> resolve -> score`, embedded at the top of the README and in the
+  landing-page hero.
+- A 1200x630 social-preview image (`docs/og.png`) wired as `og:image` /
+  `twitter:image` on the landing page (and usable as the GitHub repo social card).
+- A real, open board-minute (`examples/open-minute.{json,md}`) pre-registering
+  this project's own inbound-only launch bet -- anchored 2026-06-26, resolving
+  2026-09-24, unresolved on purpose so the repo keeps score in public from day 0.
+
+### Changed
+- README + landing page lead with `pip install` and the demo before the rationale;
+  the Quick start opens with `pip install` instead of `python -m pytest`.
+- The showcase scoreboard is now captioned honestly as a *mechanism on sample
+  data* (you supply the outcome with `resolve`), not a track record -- the
+  integrity claim rests on the anchor timestamp, not the demo numbers.
+
 ## [0.2.0] -- 2026-06-26
 
 Initial public release.

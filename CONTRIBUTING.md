@@ -34,4 +34,4 @@ sign-off cannot be merged.
 
 ## Questions
 
-Open an issue, or reach the maintainer at **dilushin@chu6a.dev**.
+Open an issue, or reach the maintainer at **support@chu6a.dev**.

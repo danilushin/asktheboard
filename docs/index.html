@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>ask-the-board &mdash; the board that keeps score, before the fact</title>
+<meta name="description" content="A board of expert personas whose every decision is a pre-registered, time-anchored, reality-graded bet. BYOK, zero runtime dependencies, MIT.">
+<meta property="og:title" content="ask-the-board">
+<meta property="og:description" content="Not a chatbot that agrees with you -- a board that keeps score, before the fact. BYOK, zero dependencies, MIT.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://danilushin.github.io/asktheboard/">
+<meta property="og:image" content="https://danilushin.github.io/asktheboard/og.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="ask-the-board">
+<meta name="twitter:description" content="Not a chatbot that agrees with you -- a board that keeps score, before the fact. BYOK, zero dependencies, MIT.">
+<meta name="twitter:image" content="https://danilushin.github.io/asktheboard/og.png">
+<style>
+  :root{
+    --bg:#0b0f14; --panel:#121821; --panel2:#0e141c; --line:#222d3a;
+    --ink:#e6edf3; --muted:#9aa7b4; --accent:#5eb0ef; --accent2:#7ee787;
+    --warn:#f0b429; --code:#0a0e13;
+  }
+  *{box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{
+    margin:0; background:var(--bg); color:var(--ink);
+    font:16px/1.6 -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+    -webkit-font-smoothing:antialiased;
+  }
+  a{color:var(--accent); text-decoration:none}
+  a:hover{text-decoration:underline}
+  .wrap{max-width:860px; margin:0 auto; padding:0 24px}
+  code,pre{font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace}
+
+  header{padding:72px 0 40px; text-align:center; border-bottom:1px solid var(--line)}
+  .eyebrow{color:var(--accent2); font-size:13px; letter-spacing:.14em; text-transform:uppercase; font-weight:600}
+  h1{font-size:clamp(34px,6vw,56px); margin:14px 0 10px; letter-spacing:-.02em}
+  .tag{font-size:clamp(17px,2.4vw,21px); color:var(--ink); max-width:620px; margin:0 auto 6px}
+  .sub{color:var(--muted); max-width:620px; margin:0 auto}
+  .cta{display:flex; gap:12px; justify-content:center; flex-wrap:wrap; margin:28px 0 8px}
+  .btn{display:inline-block; padding:11px 20px; border-radius:10px; font-weight:600; border:1px solid var(--line)}
+  .btn.primary{background:var(--accent); color:#06121f; border-color:var(--accent)}
+  .btn.primary:hover{filter:brightness(1.08); text-decoration:none}
+  .btn.ghost{background:transparent; color:var(--ink)}
+  .btn.ghost:hover{border-color:var(--accent); text-decoration:none}
+
+  .install{max-width:520px; margin:18px auto 0}
+  pre.cmd{background:var(--code); border:1px solid var(--line); border-radius:10px; padding:14px 16px; overflow:auto; margin:0; text-align:left}
+  pre.cmd code{color:var(--accent2)}
+  pre.cmd .prompt{color:var(--muted)}
+  .demo{display:block; width:100%; max-width:680px; height:auto; margin:30px auto 0;
+        border:1px solid var(--line); border-radius:14px; box-shadow:0 18px 60px rgba(0,0,0,.45)}
+  .demo-cap{color:var(--muted); font-size:13px; margin:10px auto 0; max-width:680px}
+
+  section{padding:48px 0; border-bottom:1px solid var(--line)}
+  h2{font-size:24px; margin:0 0 18px; letter-spacing:-.01em}
+  .lead{color:var(--muted); margin-top:-8px}
+  ol.records{padding-left:20px; margin:0}
+  ol.records li{margin:10px 0}
+  ol.records b{color:var(--ink)}
+
+  .grid{display:grid; grid-template-columns:1fr 1fr; gap:16px}
+  @media(max-width:680px){.grid{grid-template-columns:1fr}}
+  .card{background:var(--panel); border:1px solid var(--line); border-radius:12px; padding:20px}
+  .card h3{margin:0 0 8px; font-size:17px}
+  .card p{margin:0; color:var(--muted); font-size:15px}
+
+  table.board{width:100%; border-collapse:collapse; background:var(--panel2); border:1px solid var(--line); border-radius:12px; overflow:hidden; font-size:14px}
+  table.board th,table.board td{padding:10px 14px; text-align:left; border-bottom:1px solid var(--line)}
+  table.board th{color:var(--muted); font-weight:600}
+  table.board tr:last-child td{border-bottom:0}
+  table.board td.num{font-family:ui-monospace,monospace; color:var(--accent2)}
+  .win{color:var(--accent2)} .loss{color:var(--warn)}
+  .note{color:var(--muted); font-size:14px; margin-top:12px}
+
+  .waitlist{background:linear-gradient(180deg,var(--panel),var(--panel2)); border:1px solid var(--line); border-radius:14px; padding:28px; text-align:center}
+  .waitlist h2{margin-top:0}
+  .pill{display:inline-block; background:var(--code); border:1px solid var(--line); border-radius:999px; padding:6px 14px; font-family:ui-monospace,monospace; font-size:14px; color:var(--accent2)}
+
+  footer{padding:36px 0 56px; text-align:center; color:var(--muted); font-size:14px}
+  footer a{margin:0 8px}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="wrap">
+    <div class="eyebrow">open source &middot; BYOK &middot; MIT</div>
+    <h1>ask-the-board</h1>
+    <p class="tag"><b>A board of expert personas whose every decision is a
+      pre-registered, time-anchored, reality-graded bet.</b></p>
+    <p class="sub">Not a chatbot that agrees with you &mdash; a board that keeps
+      score, <em>before</em> the fact.</p>
+    <div class="cta">
+      <a class="btn primary" href="https://pypi.org/project/asktheboard/">Get it on PyPI</a>
+      <a class="btn ghost" href="https://github.com/danilushin/asktheboard">View on GitHub</a>
+    </div>
+    <div class="install">
+      <pre class="cmd"><code><span class="prompt">$</span> pip install asktheboard</code></pre>
+    </div>
+    <img class="demo" src="demo.svg" alt="asktheboard in the terminal: create a board-minute, resolve it against reality, then score -- the dissenting seat was wrong this time, and the board kept the receipt.">
+    <p class="demo-cap">Mechanism on sample data &mdash; the 60-second, no-key walkthrough below reproduces it exactly.</p>
+  </div>
+</header>
+
+<section>
+  <div class="wrap">
+    <h2>Why this exists</h2>
+    <p class="lead">Anyone can clone a &ldquo;panel of AI personas&rdquo; in a
+      weekend, and a dozen have. The debate mechanic is a commodity. What it leaves
+      out is the thing that makes advice worth trusting: a record of having been
+      right <em>before the outcome was knowable</em>. That record is <b>hard to
+      fake</b> &mdash; you can buy model outputs, but you can&rsquo;t back-date a
+      timestamp.</p>
+    <p>So ask-the-board records, for every decision:</p>
+    <ol class="records">
+      <li>your <b>stated prior</b> &mdash; what you believed going in;</li>
+      <li>the <b>per-seat dissent vector</b> &mdash; each seat&rsquo;s stance + its own probability;</li>
+      <li>a <b>dated, falsifiable prediction</b>, anchored <em>before</em> the outcome is knowable;</li>
+      <li>on the resolution date, reality&rsquo;s <b>realized outcome</b>, auto-reconciled into a <b>Brier / calibration score per seat</b>.</li>
+    </ol>
+    <p class="note">The board-minute is a <b>git-committable ADR</b>. Your git
+      history is the external attestation of the anchor timestamp. The
+      accumulating, reality-graded record is the durable asset.</p>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <h2>See it keep score</h2>
+    <p class="lead"><code>create &rarr; resolve &rarr; score</code> is pure data
+      &mdash; no LLM, no key, no network. This is a <b>worked example on sample
+      data</b>: you supply the outcome with <code>resolve</code>, and the engine
+      computes each seat&rsquo;s Brier score (lower is better). It shows the
+      <em>mechanism</em>, not a track record &mdash; the integrity comes from the
+      anchor timestamp your git history attests, which no demo can fabricate.</p>
+    <table class="board">
+      <thead><tr><th>seat</th><th>n</th><th>mean_brier</th><th>wins</th><th>losses</th></tr></thead>
+      <tbody>
+        <tr><td>karpathy</td><td class="num">1</td><td class="num">0.040</td><td class="num win">0</td><td class="num">0</td></tr>
+        <tr><td>skeptic</td><td class="num">1</td><td class="num">0.423</td><td class="num">0</td><td class="num loss">1</td></tr>
+      </tbody>
+    </table>
+    <p class="note">On a <em>real</em>, dated minute the same mechanic produces a
+      <em>contrarian win</em> &mdash; a seat that <b>dissents</b> and turns out
+      more right than the board. That&rsquo;s the gold the aged public scoreboard
+      is built from, once minutes resolve against reality you didn&rsquo;t set.</p>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <h2>What you get</h2>
+    <div class="grid">
+      <div class="card">
+        <h3>BYOK, zero COGS</h3>
+        <p>The engine ships no provider and makes no calls of its own. You bring
+          your own key and pay your own inference, so it costs nothing to run at
+          any scale.</p>
+      </div>
+      <div class="card">
+        <h3>Zero runtime dependencies</h3>
+        <p>The OpenAI-compatible HTTP client is stdlib-only. Point it at OpenAI,
+          OpenRouter, Together, or a local server.</p>
+      </div>
+      <div class="card">
+        <h3>Integrity enforced in code</h3>
+        <p>You can&rsquo;t pre-register a prediction onto a known outcome, and you
+          can&rsquo;t grade a minute before its resolution date. That&rsquo;s what
+          makes it foresight.</p>
+      </div>
+      <div class="card">
+        <h3>A bundled board</h3>
+        <p>Role archetypes &mdash; architect, skeptic, pragmatist, researcher,
+          operator, strategist &mdash; and named panels, so seating one is a single
+          lookup. The skeptic sits on every panel by design.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <div class="waitlist">
+      <h2>Hosted tier &mdash; join the waitlist</h2>
+      <p class="lead">The OSS engine is free forever and runs on your own key. If
+        you&rsquo;d rather not manage keys &mdash; or you want the aged,
+        reality-graded public scoreboard hosted for you &mdash; a managed, capped
+        paid tier is coming.</p>
+      <p>Email <a href="mailto:support@chu6a.dev?subject=waitlist">support@chu6a.dev</a>
+        with the subject <span class="pill">waitlist</span></p>
+      <p class="note">A one-liner on what you&rsquo;d decide with it helps, but
+        isn&rsquo;t required. No spam &mdash; one note when it opens.</p>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <a href="https://github.com/danilushin/asktheboard">GitHub</a>&middot;
+    <a href="https://pypi.org/project/asktheboard/">PyPI</a>&middot;
+    <a href="https://github.com/danilushin/asktheboard/blob/main/LICENSE">MIT</a>
+    <p>Built by Dan Ilushin. The public API is 0.x / unstable until 1.0.</p>
+  </div>
+</footer>
+
+</body>
+</html>

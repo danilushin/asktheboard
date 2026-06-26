@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 760 430" width="760" height="430" font-family="ui-monospace,SFMono-Regular,Menlo,Consolas,monospace" role="img" aria-label="asktheboard demo: create, resolve, score - the board keeps score before the fact">
+  <style>
+    .ink{fill:#e6edf3}.muted{fill:#9aa7b4}.green{fill:#7ee787}.amber{fill:#f0b429}.accent{fill:#5eb0ef}
+    text{font-size:14.5px}
+    .cmd{font-size:14.5px}
+    .cap{font-size:16px;font-weight:700}
+    /* Animations enhance where supported; base state (no CSS) shows everything. */
+    #gA,#gB,#gC,#gD{animation:hold 15s linear infinite}
+    #gB{animation-name:b}#gC{animation-name:c}#gD{animation-name:d}
+    #gA{animation-name:a}
+    @keyframes a{0%,4%{opacity:0}9%,96%{opacity:1}100%{opacity:0}}
+    @keyframes b{0%,22%{opacity:0}27%,96%{opacity:1}100%{opacity:0}}
+    @keyframes c{0%,42%{opacity:0}47%,96%{opacity:1}100%{opacity:0}}
+    @keyframes d{0%,62%{opacity:0}67%,96%{opacity:1}100%{opacity:0}}
+    @keyframes hold{0%,100%{opacity:1}}
+    #cur{animation:blink 1.05s steps(1) infinite}
+    @keyframes blink{0%,49%{opacity:1}50%,100%{opacity:0}}
+  </style>
+
+  <rect x="0.5" y="0.5" width="759" height="429" rx="14" fill="#0b0f14" stroke="#222d3a"/>
+  <rect x="0.5" y="0.5" width="759" height="34" rx="14" fill="#121821"/>
+  <rect x="0.5" y="20" width="759" height="15" fill="#121821"/>
+  <line x1="0.5" y1="34.5" x2="759.5" y2="34.5" stroke="#222d3a"/>
+  <circle cx="22" cy="17.5" r="6" fill="#ff5f56"/>
+  <circle cx="42" cy="17.5" r="6" fill="#febc2e"/>
+  <circle cx="62" cy="17.5" r="6" fill="#27c93f"/>
+  <text x="380" y="22.5" text-anchor="middle" class="muted" font-size="12.5">asktheboard &#8212; keeps score, before the fact</text>
+
+  <g id="gA">
+    <text x="24" y="68" class="cmd"><tspan class="muted">$</tspan> <tspan class="green">asktheboard create</tspan><tspan class="ink"> --spec minute.json</tspan></text>
+    <text x="24" y="90" class="muted"><tspan class="green">[ok]</tspan> pre-registered  2026-01-postgres-vs-vectordb</text>
+    <text x="24" y="112" class="muted">     prediction frozen -&gt; resolves 2026-04-01  (anchor committed to git)</text>
+  </g>
+
+  <g id="gB">
+    <text x="24" y="148" class="cmd"><tspan class="muted">$</tspan> <tspan class="green">asktheboard resolve</tspan><tspan class="ink"> --id 2026-01-postgres-vs-vectordb --outcome true</tspan></text>
+    <text x="24" y="170" class="muted"><tspan class="green">[ok]</tspan> graded against reality on the resolution date</text>
+  </g>
+
+  <g id="gC">
+    <text x="24" y="206" class="cmd"><tspan class="muted">$</tspan> <tspan class="green">asktheboard score</tspan></text>
+    <text x="24" y="230" class="muted" xml:space="preserve">seat        n   mean_brier   wins   losses</text>
+    <text x="24" y="252" xml:space="preserve"><tspan class="green">karpathy    1        0.040      0        0</tspan><tspan class="muted">   &lt;- affirm, right</tspan></text>
+    <text x="24" y="274" xml:space="preserve"><tspan class="amber">skeptic     1        0.423      0        1</tspan><tspan class="muted">   &lt;- dissent, wrong</tspan></text>
+  </g>
+
+  <g id="gD">
+    <text x="24" y="322" class="cap accent">The board kept score &#8212; <tspan class="ink">before</tspan> the fact.</text>
+    <text x="24" y="348" class="muted" font-size="13">You can&#8217;t back-date a timestamp. The record is the moat.</text>
+    <text x="24" y="392" class="cmd"><tspan class="muted">$</tspan> <tspan id="cur" class="ink">&#9608;</tspan></text>
+  </g>
+</svg>

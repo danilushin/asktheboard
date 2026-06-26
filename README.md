@@ -9,10 +9,15 @@
 time-anchored, reality-graded bet.** Not a chatbot that agrees with you -- a board
 that keeps score, *before* the fact.
 
-> Status: Phase-0 core + live convening. The **foresight engine** (data model +
-> grading + committable ADR) and the **BYOK LLM fan-out** that *produces* a
-> board-minute (`asktheboard.convene`, behind the `asktheboard.llm` Protocol) are
-> both in. No provider is bundled -- you plug in your own key.
+**Landing page & docs:** <https://danilushin.github.io/asktheboard/>
+
+![asktheboard in the terminal: pre-register a board-minute, resolve it against reality on the date, then score each seat by Brier -- the dissenting seat was wrong this time, and the board kept the receipt.](https://raw.githubusercontent.com/danilushin/asktheboard/main/docs/demo.svg)
+
+*Mechanism on sample data — the 60-second, no-key walkthrough below reproduces it exactly.*
+
+```bash
+pip install asktheboard
+```
 
 ## Why this exists
 
@@ -37,10 +42,12 @@ the durable asset.
 
 ## See it keep score (60s, no API key)
 
-`create -> resolve -> score` is pure data -- no LLM, no key, no network. The
-[`examples/`](examples/) folder holds a **real** resolved board-minute: the
-affirming seat called it right, the dissenting `skeptic` got it wrong, and the
-scoreboard ranks them by Brier score (lower is better).
+`create -> resolve -> score` is pure data -- no LLM, no key, no network. This is a
+**worked example on sample data**: you supply the outcome with `resolve`, and the
+engine computes each seat's Brier score (lower is better). It shows the *mechanism*,
+not a track record -- the integrity comes from the anchor timestamp your git history
+attests, which no demo can fabricate. The committed artifacts live in
+[`examples/`](examples/).
 
 ```bash
 # pip-installed (no repo)? paste the sample spec below. Cloned the repo?
@@ -64,9 +71,9 @@ cat > sample_minute.json <<'JSON'
 }
 JSON
 
-python -m asktheboard.cli create  --spec sample_minute.json
-python -m asktheboard.cli resolve --id 2026-01-postgres-vs-vectordb --outcome true
-python -m asktheboard.cli score
+asktheboard create  --spec sample_minute.json
+asktheboard resolve --id 2026-01-postgres-vs-vectordb --outcome true
+asktheboard score
 ```
 
 ```
@@ -78,6 +85,11 @@ skeptic            1       0.423     0       1
 
 Full walkthrough + committed artifacts: [`examples/README.md`](examples/README.md).
 
+And a real one, still open: this repo pre-registered a board-minute about **its own
+launch** -- [`examples/open-minute.md`](examples/open-minute.md), anchored in git on
+2026-06-26, resolving 2026-09-24. No score yet; that's the point. The board may turn
+out wrong, and the anchor means it can't pretend otherwise.
+
 ## BYOK (bring your own API key)
 
 The engine ships no provider and makes no calls of its own. You supply your own
@@ -85,6 +97,16 @@ LLM key; you pay your own inference. The open-source core therefore costs nothin
 to run at any scale -- the cost lives with the user, not a host. (A managed,
 capped hosted tier -- for people who would rather not manage keys -- is the
 separate, paid product.)
+
+## Hosted tier -- join the waitlist
+
+The OSS engine is free forever and runs on your own key. If you'd rather not
+manage keys -- or you want the **aged, reality-graded public scoreboard** hosted
+for you -- a managed, capped paid tier is coming.
+
+**Want early access?** Email **support@chu6a.dev** with the subject `waitlist`
+(a one-liner on what you'd decide with it helps, but isn't required). No spam --
+one note when it opens.
 
 ## Integrity guarantees (enforced in code)
 
@@ -100,16 +122,16 @@ See `tests/test_model.py` -- these are the load-bearing tests.
 ## Quick start
 
 ```bash
-python -m pytest                       # run the suite
+pip install asktheboard
 
-# pre-register a decision (the board-minute spec is JSON)
-python -m asktheboard.cli create  --spec tests/sample_minute.json
+# pre-register a decision (board-minute spec is JSON -- see "See it keep score" above)
+asktheboard create  --spec sample_minute.json
 
 # ... months later, on/after the resolution date, grade it against reality
-python -m asktheboard.cli resolve --id 2026-01-postgres-vs-vectordb --outcome false
+asktheboard resolve --id 2026-01-postgres-vs-vectordb --outcome false
 
 # per-seat calibration scoreboard, best-calibrated first
-python -m asktheboard.cli score
+asktheboard score
 ```
 
 `create` writes both `<id>.json` (the record) and `<id>.md` (the committable ADR)
@@ -140,7 +162,7 @@ minute = convene(
 Or from the CLI (key in `OPENAI_API_KEY`):
 
 ```bash
-python -m asktheboard.cli convene --spec convene.json --model gpt-4o-mini
+asktheboard convene --spec convene.json --model gpt-4o-mini
 ```
 
 Any OpenAI-compatible API works -- point `--base-url` (or `HTTPLLMClient(base_url=...)`)
@@ -173,9 +195,9 @@ minute = convene(
 From the CLI, pass `--panel` or `--seats` instead of putting seats in the spec:
 
 ```bash
-python -m asktheboard.cli roster                                   # list seats + panels
-python -m asktheboard.cli convene --spec d.json --model gpt-4o-mini --panel tech
-python -m asktheboard.cli convene --spec d.json --model gpt-4o-mini --seats architect,skeptic
+asktheboard roster                                   # list seats + panels
+asktheboard convene --spec d.json --model gpt-4o-mini --panel tech
+asktheboard convene --spec d.json --model gpt-4o-mini --seats architect,skeptic
 ```
 
 | seat | voice |
@@ -215,6 +237,11 @@ from. The board changed (or should have changed) its mind, and reality later
 stamped the dissenter vindicated.
 
 ## Stability
+
+**What's shipped:** the **foresight engine** (data model + grading + committable
+ADR) and the **BYOK LLM fan-out** that *produces* a board-minute
+(`asktheboard.convene`, behind the `asktheboard.llm` Protocol). No provider is
+bundled -- you plug in your own key.
 
 The public API is **`0.x` / unstable**. The `LLMClient` / `HTTPLLMClient` surface
 and the board-minute JSON schema may change before `1.0` -- pin a version if you
