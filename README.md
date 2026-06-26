@@ -64,7 +64,7 @@ cat > sample_minute.json <<'JSON'
     "board_probability": 0.75
   },
   "seats": [
-    {"seat": "karpathy", "stance": "affirm", "probability": 0.8, "rationale": "Boring tech; pgvector is enough at this scale."},
+    {"seat": "pragmatist", "stance": "affirm", "probability": 0.8, "rationale": "Boring tech; pgvector is enough at this scale."},
     {"seat": "skeptic", "stance": "dissent", "probability": 0.35, "rationale": "Recall/latency will bite once the corpus 10x's."}
   ],
   "created_at": "2026-01-05T10:30:00"
@@ -79,7 +79,7 @@ asktheboard score
 ```
 seat               n  mean_brier  wins  losses
 ----------------------------------------------
-karpathy           1       0.040     0       0
+pragmatist         1       0.040     0       0
 skeptic            1       0.423     0       1
 ```
 
@@ -153,7 +153,7 @@ minute = convene(
     prior="leaning postgres to avoid a new service",
     decision="stay on postgres + pgvector",
     statement="pgvector serves p95<150ms at 50M embeddings without a dedicated DB",
-    seats=[Seat("karpathy", "ML researcher"), Seat("skeptic", "find the failure mode")],
+    seats=[Seat("pragmatist", "ML researcher"), Seat("skeptic", "find the failure mode")],
     client=HTTPLLMClient(model="gpt-4o-mini"),   # reads OPENAI_API_KEY
     decision_type="library",                     # -> 90-day resolution horizon
 )

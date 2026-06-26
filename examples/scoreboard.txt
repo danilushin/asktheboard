@@ -1,4 +1,4 @@
 seat               n  mean_brier  wins  losses
 ----------------------------------------------
-karpathy           1       0.040     0       0
+pragmatist         1       0.040     0       0
 skeptic            1       0.423     0       1

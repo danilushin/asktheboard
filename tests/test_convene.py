@@ -25,12 +25,12 @@ class FakeLLMClient:
         raise AssertionError(f"no canned answer for system={system!r}")
 
 
-SEATS = [Seat("karpathy", "ML researcher"), Seat("skeptic", "argue why it fails")]
+SEATS = [Seat("pragmatist", "ML researcher"), Seat("skeptic", "argue why it fails")]
 
 
 def _answers():
     return {
-        "karpathy": '{"stance": "affirm", "probability": 0.8, "rationale": "scales fine"}',
+        "pragmatist": '{"stance": "affirm", "probability": 0.8, "rationale": "scales fine"}',
         "skeptic": '{"stance": "dissent", "probability": 0.35, "rationale": "ops cost"}',
     }
 
@@ -55,7 +55,7 @@ def test_convene_builds_minute_with_mean_board_probability():
     # decision_type drove the horizon (library = 90d)
     assert m.prediction.resolution_date == date(2026, 1, 1) + timedelta(days=90)
     # the dissent vector is preserved end-to-end (the moat mechanic)
-    assert {s.seat: s.stance for s in m.seats} == {"karpathy": "affirm", "skeptic": "dissent"}
+    assert {s.seat: s.stance for s in m.seats} == {"pragmatist": "affirm", "skeptic": "dissent"}
     # one LLM call per seat -- the fan-out fired
     assert len(client.calls) == 2
 

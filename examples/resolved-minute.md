@@ -23,7 +23,7 @@ Stay on Postgres + pgvector for now.
 
 | Seat | Stance | P(true) | Brier | Rationale |
 |---|---|---|---|---|
-| karpathy | affirm | 80% | 0.040 | Boring tech; pgvector is enough at this scale. |
+| pragmatist | affirm | 80% | 0.040 | Boring tech; pgvector is enough at this scale. |
 | skeptic | dissent | 35% | 0.423 | Recall/latency will bite once the corpus 10x's. |
 
 ## Resolution

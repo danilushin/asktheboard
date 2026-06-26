@@ -4,6 +4,16 @@ All notable changes are documented here. This project follows
 [Semantic Versioning](https://semver.org/); before `1.0`, minor versions may
 introduce breaking changes.
 
+## [0.2.2] -- 2026-06-26
+
+### Changed
+- Renamed the demo/example seat `karpathy` to the generic role `pragmatist`
+  across the README, landing page (`docs/index.html`), animated demo
+  (`docs/demo.svg`), and the `examples/` artifacts (plus the test fixtures).
+  The shipped roster is generic role archetypes by design; the sample data now
+  matches that and avoids using a real person's name. No code or API changes --
+  engine behavior is identical to 0.2.1.
+
 ## [0.2.1] -- 2026-06-26
 
 ### Added

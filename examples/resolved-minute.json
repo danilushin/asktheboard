@@ -10,7 +10,7 @@
   },
   "seats": [
     {
-      "seat": "karpathy",
+      "seat": "pragmatist",
       "stance": "affirm",
       "probability": 0.8,
       "rationale": "Boring tech; pgvector is enough at this scale."

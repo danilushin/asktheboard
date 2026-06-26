@@ -41,7 +41,7 @@
   <g id="gC">
     <text x="24" y="206" class="cmd"><tspan class="muted">$</tspan> <tspan class="green">asktheboard score</tspan></text>
     <text x="24" y="230" class="muted" xml:space="preserve">seat        n   mean_brier   wins   losses</text>
-    <text x="24" y="252" xml:space="preserve"><tspan class="green">karpathy    1        0.040      0        0</tspan><tspan class="muted">   &lt;- affirm, right</tspan></text>
+    <text x="24" y="252" xml:space="preserve"><tspan class="green">pragmatist  1        0.040      0        0</tspan><tspan class="muted">   &lt;- affirm, right</tspan></text>
     <text x="24" y="274" xml:space="preserve"><tspan class="amber">skeptic     1        0.423      0        1</tspan><tspan class="muted">   &lt;- dissent, wrong</tspan></text>
   </g>
 

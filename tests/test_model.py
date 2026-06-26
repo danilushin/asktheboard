@@ -81,21 +81,21 @@ def test_anchor_is_immutable_across_resolution():
 
 def test_contrarian_winner_detection():
     seats = [
-        SeatCall("karpathy", "affirm", 0.8, "boring tech wins"),
+        SeatCall("pragmatist", "affirm", 0.8, "boring tech wins"),
         SeatCall("skeptic", "dissent", 0.2, "you'll outgrow it"),
     ]
     m = _minute(board_p=0.8, seats=seats)
     # Reality: FALSE (they DID migrate). Skeptic (dissent, p=0.2) was more right.
     m.resolve(False, resolved_at=datetime.fromisoformat("2026-04-02T12:00:00"))
     briers = m.seat_briers()
-    assert briers["karpathy"] == pytest.approx(0.64)  # (0.8-0)^2
+    assert briers["pragmatist"] == pytest.approx(0.64)  # (0.8-0)^2
     assert briers["skeptic"] == pytest.approx(0.04)   # (0.2-0)^2
     assert m.contrarian_winners() == ["skeptic"]
 
 
 def test_no_contrarian_win_when_dissent_was_wrong():
     seats = [
-        SeatCall("karpathy", "affirm", 0.8, ""),
+        SeatCall("pragmatist", "affirm", 0.8, ""),
         SeatCall("skeptic", "dissent", 0.2, ""),
     ]
     m = _minute(board_p=0.8, seats=seats)

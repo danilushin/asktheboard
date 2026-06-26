@@ -19,14 +19,14 @@ asktheboard score
 
 ## What you'll see
 
-A resolved, graded board-minute -- the affirming seat (`karpathy`) was right, the
+A resolved, graded board-minute -- the affirming seat (`pragmatist`) was right, the
 dissenting `skeptic` was wrong, and the scoreboard ranks them by Brier score
 (lower is better):
 
 ```
 seat               n  mean_brier  wins  losses
 ----------------------------------------------
-karpathy           1       0.040     0       0
+pragmatist         1       0.040     0       0
 skeptic            1       0.423     0       1
 ```
 

@@ -9,7 +9,7 @@
     "board_probability": 0.75
   },
   "seats": [
-    {"seat": "karpathy", "stance": "affirm", "probability": 0.8, "rationale": "Boring tech; pgvector is enough at this scale."},
+    {"seat": "pragmatist", "stance": "affirm", "probability": 0.8, "rationale": "Boring tech; pgvector is enough at this scale."},
     {"seat": "skeptic", "stance": "dissent", "probability": 0.35, "rationale": "Recall/latency will bite once the corpus 10x's."}
   ],
   "created_at": "2026-01-05T10:30:00"
