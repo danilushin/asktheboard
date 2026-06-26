@@ -1,0 +1,7 @@
+__pycache__/
+*.py[cod]
+.pytest_cache/
+board-minutes/
+*.egg-info/
+build/
+dist/
