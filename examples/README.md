@@ -58,3 +58,18 @@ No score yet -- that is the whole point. On 2026-09-24 the maintainer runs
 `asktheboard resolve` against reality and the seats get graded in public. The
 board may well be **wrong**, and the git anchor means it cannot quietly pretend
 otherwise. That is what "keeps score, before the fact" means.
+
+## And a fast one -- bet #1 of a public cadence
+
+[`2026-06-jobs-report.md`](2026-06-jobs-report.md) ([`.json`](2026-06-jobs-report.json))
+resolves in **days**, not months: the board's call on the **June 2026 US jobs report**,
+anchored 2026-06-27, resolving **2026-07-02** against the BLS Employment Situation release.
+
+```
+Status:     Pre-registered (resolves 2026-07-02)
+Prediction: June 2026 US nonfarm payrolls +150k or more  (board 56%)
+Dissent:    skeptic at 40% -- "150k is the median; a coin-flip dressed as a call"
+```
+
+Short-horizon on purpose: a fresh board earns trust on fast public calls before anyone
+weighs its slow ones. Come back on the date and watch it grade.

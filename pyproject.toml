@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "asktheboard"
-version = "0.2.2"
+version = "0.2.3"
 description = "A board of expert personas whose every decision is a pre-registered, time-anchored, reality-graded bet. BYOK; the board that keeps score, before the fact."
 readme = "README.md"
 requires-python = ">=3.10"

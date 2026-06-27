@@ -4,6 +4,25 @@ All notable changes are documented here. This project follows
 [Semantic Versioning](https://semver.org/); before `1.0`, minor versions may
 introduce breaking changes.
 
+## [0.2.3] -- 2026-06-27
+
+### Added
+- **Live public bet #1** (`examples/2026-06-jobs-report.{json,md}`): a fast-resolving,
+  git-anchored board call on the June 2026 US jobs report -- filed 2026-06-27, resolving
+  2026-07-02 against the BLS Employment Situation release. The board says +150k or more at
+  56%; the skeptic dissents at 40%. The first bet of a public, recurring cadence, so the
+  launch scoreboard shows a real call graded against reality, not a 0-0 promise.
+- **Machine-ingest substrate** for answer engines / AI crawlers: `docs/llms.txt`,
+  `docs/llms-full.txt`, `docs/robots.txt` (GPTBot / ClaudeBot / PerplexityBot /
+  Google-Extended explicitly allowed), and `docs/sitemap.xml`.
+- **JSON-LD** `SoftwareApplication` structured data plus a canonical link on the landing
+  page (`docs/index.html`), so the project is machine-readable and citable.
+
+### Changed
+- Landing page + README now lead the live bet above the fold ("come back and watch it
+  grade") and sharpen the positioning toward pre-registered, falsifiable forecasting. No
+  engine or API changes -- behavior is identical to 0.2.2.
+
 ## [0.2.2] -- 2026-06-26
 
 ### Changed

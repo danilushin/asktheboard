@@ -90,6 +90,13 @@ launch** -- [`examples/open-minute.md`](examples/open-minute.md), anchored in gi
 2026-06-26, resolving 2026-09-24. No score yet; that's the point. The board may turn
 out wrong, and the anchor means it can't pretend otherwise.
 
+**Live bet #1 (resolves in days):** the board's call on the **June 2026 US jobs report**
+-- [`examples/2026-06-jobs-report.md`](examples/2026-06-jobs-report.md),
+anchored 2026-06-27, resolving **2026-07-02** against the BLS Employment Situation
+release. The board says **+150k or more at 56%**; the skeptic dissents at 40%. Bet #1 of
+a public, recurring cadence -- come back on the date and watch it grade against a source
+nobody controls.
+
 ## BYOK (bring your own API key)
 
 The engine ships no provider and makes no calls of its own. You supply your own

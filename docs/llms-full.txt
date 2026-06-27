@@ -1,0 +1,113 @@
+# ask-the-board -- full reference
+
+> A board of expert personas whose every decision is a pre-registered, time-anchored, reality-graded bet. Open source (MIT), BYOK, zero runtime dependencies. Not a chatbot that agrees with you -- a board that keeps score, before the fact.
+
+## What it is
+
+ask-the-board is a Python library and CLI for **pre-registered, falsifiable AI forecasting you can't fudge**. Anyone can clone a "panel of AI personas" in a weekend, and a dozen have -- the debate mechanic is a commodity. What it leaves out is the thing that makes advice worth trusting: a record of having been right *before the outcome was knowable*. That record is hard to fake -- you can buy model outputs, but you can't back-date a git timestamp. It only accrues the slow way: by calling decisions in advance and letting reality grade them, one resolution date at a time.
+
+## What it records (every decision)
+
+1. Your **stated prior** -- what you believed going in.
+2. The **per-seat dissent vector** -- each seat's stance (affirm/dissent) plus its own probability.
+3. A **dated, falsifiable prediction**, anchored *before* the outcome is knowable.
+4. On the resolution date, reality's **realized outcome**, auto-reconciled into a **Brier / calibration score per seat** (lower is better).
+
+The board-minute is a **git-committable ADR**. Your git history is the external attestation of the anchor timestamp. The accumulating, reality-graded record is the durable asset.
+
+## Integrity guarantees (enforced in code, not promised in prose)
+
+- A prediction **cannot be pre-registered to resolve in the past** -- no backfilling an "old" call onto a known outcome.
+- A minute **cannot be graded before its resolution date** -- the outcome must not be knowable yet. That is what makes it foresight.
+- The anchor timestamp and the prediction are **frozen** once created; grading never moves them.
+
+These are pinned by load-bearing tests (`tests/test_model.py`).
+
+## Install
+
+```
+pip install asktheboard
+```
+
+Requires Python 3.10+. Zero runtime dependencies.
+
+## CLI
+
+- `asktheboard create --spec minute.json` -- pre-register a board-minute you wrote by hand. No key, no network. Writes `<id>.json` (the record) and `<id>.md` (the committable ADR) into `board-minutes/`.
+- `asktheboard convene --spec convene.json --model <m> [--base-url URL] [--panel NAME | --seats slugs]` -- the BYOK live LLM fan-out: every seat answers through *your* key, and the board's consensus probability is the mean of the seats' calls. Reads `OPENAI_API_KEY`.
+- `asktheboard resolve --id <id> --outcome true|false [--note ...]` -- grade a minute against reality on or after its resolution date.
+- `asktheboard score` -- per-seat calibration scoreboard, best-calibrated first.
+- `asktheboard roster` -- list the bundled seats and panels.
+
+## Board-minute spec (JSON)
+
+```json
+{
+  "id": "2026-01-postgres-vs-vectordb",
+  "question": "Adopt Postgres + pgvector, or a dedicated vector DB?",
+  "prior": "Leaning toward a dedicated vector DB for the embeddings workload.",
+  "decision": "Stay on Postgres + pgvector for now.",
+  "prediction": {
+    "statement": "We will NOT migrate off Postgres for vectors within 3 months.",
+    "resolution_date": "2026-04-01",
+    "board_probability": 0.75
+  },
+  "seats": [
+    {"seat": "pragmatist", "stance": "affirm", "probability": 0.8, "rationale": "Boring tech; pgvector is enough at this scale."},
+    {"seat": "skeptic", "stance": "dissent", "probability": 0.35, "rationale": "Recall/latency will bite once the corpus 10x's."}
+  ],
+  "created_at": "2026-01-05T10:30:00"
+}
+```
+
+## BYOK (bring your own API key)
+
+The engine ships no provider and makes no calls of its own. You supply your own LLM key; you pay your own inference. The open-source core therefore costs nothing to run at any scale -- the cost lives with the user, not a host. The `HTTPLLMClient` is stdlib-only and OpenAI-compatible; point `--base-url` at OpenAI, OpenRouter, Together, or a local server.
+
+## Bundled roster -- role archetypes (functions, not impersonations)
+
+| seat | voice |
+|---|---|
+| architect | shape, maintenance cost, what breaks at scale, build-vs-buy |
+| skeptic | forced dissent -- the most likely failure first, then the deeper objection |
+| pragmatist | simplest thing that ships; YAGNI; opportunity cost |
+| researcher | what the data actually says; base rate before anecdote |
+| operator | run cost, failure budget, who gets paged at 3am |
+| strategist | base rates, second-order effects, one-way vs reversible doors |
+
+Panels: `tech` (architect/skeptic/pragmatist), `decision` (strategist/skeptic/researcher), `ops` (operator/architect/skeptic), `default` (architect/skeptic/pragmatist/strategist). The skeptic sits on every panel by design -- a board with no dissent keeps no honest score.
+
+## Decision types -> default horizons
+
+A minute is only foresight if it has a date by which reality can grade it.
+
+| type | horizon | when |
+|---|---|---|
+| library | 90d | adopt/swap/drop a dependency |
+| migration | 180d | move a datastore, platform, or pipeline |
+| architecture | 365d | a structural design bet you live with |
+
+Pass an explicit `resolution_date=` to override. Short-latency first on purpose: a fresh board earns a track record on fast `library` calls before anyone trusts its slow `architecture` bets.
+
+## Contrarian win
+
+When a seat **dissents** from the board and turns out more right than the consensus, that is a *contrarian win* -- the gold the public scoreboard is built from. The board changed (or should have changed) its mind, and reality later stamped the dissenter vindicated.
+
+## Live public bet #1
+
+The repository keeps score in public from day one. Bet #1 of a recurring cadence:
+
+- **Question:** Will the June 2026 US jobs report show nonfarm payroll growth of +150,000 or more?
+- **Prediction:** The BLS Employment Situation report for June 2026, released 2026-07-02, will report nonfarm payroll growth of +150,000 or more (initial print, seasonally adjusted).
+- **Anchored:** 2026-06-27 (git timestamp). **Resolves:** 2026-07-02 against bls.gov.
+- **Board call:** yes at 56%. Dissent: the skeptic at 40%.
+- It resolves on a fixed public date against a source nobody controls -- the board may turn out wrong, and the anchor means it can't pretend otherwise.
+
+There is also a longer-horizon open bet about the project's own inbound-only launch (anchored 2026-06-26, resolving 2026-09-24).
+
+## Links
+
+- Install: https://pypi.org/project/asktheboard/
+- Source: https://github.com/danilushin/asktheboard
+- Landing page: https://danilushin.github.io/asktheboard/
+- License: MIT (c) 2026 Dan Ilushin

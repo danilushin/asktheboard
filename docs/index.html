@@ -16,6 +16,28 @@
 <meta name="twitter:title" content="ask-the-board">
 <meta name="twitter:description" content="Not a chatbot that agrees with you -- a board that keeps score, before the fact. BYOK, zero dependencies, MIT.">
 <meta name="twitter:image" content="https://danilushin.github.io/asktheboard/og.png">
+<link rel="canonical" href="https://danilushin.github.io/asktheboard/">
+<link rel="alternate" type="text/markdown" href="https://danilushin.github.io/asktheboard/llms.txt" title="llms.txt">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "SoftwareApplication",
+  "name": "ask-the-board",
+  "alternateName": "asktheboard",
+  "applicationCategory": "DeveloperApplication",
+  "operatingSystem": "Cross-platform (Python 3.10+)",
+  "description": "A board of expert personas whose every decision is a pre-registered, time-anchored, reality-graded bet. BYOK, zero runtime dependencies, MIT. Pre-registered, falsifiable AI forecasting you can't fudge.",
+  "url": "https://danilushin.github.io/asktheboard/",
+  "downloadUrl": "https://pypi.org/project/asktheboard/",
+  "codeRepository": "https://github.com/danilushin/asktheboard",
+  "license": "https://opensource.org/licenses/MIT",
+  "programmingLanguage": "Python",
+  "isAccessibleForFree": true,
+  "offers": {"@type": "Offer", "price": "0", "priceCurrency": "USD"},
+  "author": {"@type": "Person", "name": "Dan Ilushin", "url": "https://github.com/danilushin"},
+  "keywords": "pre-registered AI prediction, calibrated AI board, falsifiable forecasting, Brier score, BYOK, decision record, ADR, LLM forecasting"
+}
+</script>
 <style>
   :root{
     --bg:#0b0f14; --panel:#121821; --panel2:#0e141c; --line:#222d3a;
@@ -104,6 +126,31 @@
     <p class="demo-cap">Mechanism on sample data &mdash; the 60-second, no-key walkthrough below reproduces it exactly.</p>
   </div>
 </header>
+
+<section id="live-bet">
+  <div class="wrap">
+    <div class="waitlist" style="text-align:left">
+      <span class="pill">LIVE &middot; bet #1 of a public cadence</span>
+      <h2 style="margin-top:14px">The board's first public call &mdash; graded by reality on a fixed date</h2>
+      <p class="lead">Filed in the open, anchored in git, resolved on the date against a source
+        nobody controls. No edits after the anchor &mdash; that is the whole point.</p>
+      <p><b>Will the June 2026 US jobs report show +150,000 nonfarm payrolls or more?</b><br>
+        The board calls <b>yes at 56%</b>. Anchored <b>2026-06-27</b>; resolves <b>2026-07-02</b> against
+        the <a href="https://www.bls.gov/news.release/empsit.nr0.htm">BLS Employment Situation</a> release.</p>
+      <table class="board">
+        <thead><tr><th>seat</th><th>stance</th><th>P(+150k)</th><th>the call</th></tr></thead>
+        <tbody>
+          <tr><td>researcher</td><td>affirm</td><td class="num">60%</td><td>central case clears the line; revisions shave the margin</td></tr>
+          <tr><td>strategist</td><td>affirm</td><td class="num">58%</td><td>labor market has beaten every cooling call this cycle</td></tr>
+          <tr><td>skeptic</td><td class="loss">dissent</td><td class="num">40%</td><td>150k is the median &mdash; a coin-flip dressed as a call</td></tr>
+        </tbody>
+      </table>
+      <p class="note"><b>Come back July 2 and watch it grade.</b> The board may turn out wrong, and the
+        git anchor means it cannot pretend otherwise. Full board-minute:
+        <a href="https://github.com/danilushin/asktheboard/blob/main/examples/2026-06-jobs-report.md">examples/2026-06-jobs-report.md</a>.</p>
+    </div>
+  </div>
+</section>
 
 <section>
   <div class="wrap">

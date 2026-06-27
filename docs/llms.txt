@@ -1,0 +1,33 @@
+# ask-the-board
+
+> A board of expert personas whose every decision is a pre-registered, time-anchored, reality-graded bet. Open source (MIT), BYOK (bring your own LLM key), zero runtime dependencies. Not a chatbot that agrees with you -- a board that keeps score, before the fact.
+
+ask-the-board is a Python library and CLI for **pre-registered, falsifiable AI forecasting you can't fudge**. Every decision is recorded as a *board-minute*: a stated prior, a per-seat dissent vector (each persona's stance + its own probability), and a dated, falsifiable prediction anchored in git *before* the outcome is knowable. On the resolution date, reality's realized outcome is auto-reconciled into a per-seat Brier / calibration score. The git commit timestamp is the external anti-cheat: you can buy model outputs, but you can't back-date a commit.
+
+Integrity is enforced in code, not promised in prose: a prediction cannot be pre-registered to resolve in the past (no backfilling a call onto a known outcome); a minute cannot be graded before its resolution date; the anchor timestamp and prediction are frozen once created.
+
+## Core concepts
+
+- The anti-cheat: a reality-graded track record, accrued one resolution date at a time, that no funded competitor can retroactively manufacture. The debate mechanic is a commodity; the dated, graded record is not.
+- Board-minute: a stated prior + a per-seat dissent vector + a dated, falsifiable prediction, rendered as a git-committable ADR (Architecture Decision Record).
+- Brier score: per-seat calibration over resolved minutes (lower is better). A *contrarian win* is a dissenting seat that turned out more right than the board consensus -- the gold the public scoreboard is built from.
+- BYOK (bring your own key): the engine ships no provider and makes no calls of its own. You bring an OpenAI-compatible key and pay your own inference, so the open-source core costs nothing to run at any scale.
+
+## Commands
+
+- `asktheboard create --spec minute.json`: pre-register a board-minute by hand (no key, no network) -- writes the JSON record and a committable Markdown ADR.
+- `asktheboard convene --spec convene.json --model <m>`: BYOK live LLM fan-out that produces a board-minute through your own key (OpenAI, OpenRouter, Together, or a local server).
+- `asktheboard resolve --id <id> --outcome true|false`: grade a minute against reality on or after its resolution date.
+- `asktheboard score`: per-seat calibration scoreboard, best-calibrated first.
+
+## Live public bet
+
+- The repository keeps score in public. Bet #1 of a recurring cadence: the board's call on the June 2026 US jobs report -- the BLS Employment Situation release on 2026-07-02 will show nonfarm payrolls of +150,000 or more. Filed (git-anchored) 2026-06-27; the board says yes at 56%, the skeptic dissents at 40%. It resolves on a fixed public date against a source nobody controls.
+
+## Links
+
+- Install: `pip install asktheboard` -- https://pypi.org/project/asktheboard/
+- Source: https://github.com/danilushin/asktheboard
+- Landing page: https://danilushin.github.io/asktheboard/
+- Full reference for LLMs: https://danilushin.github.io/asktheboard/llms-full.txt
+- License: MIT
