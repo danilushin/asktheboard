@@ -31,7 +31,7 @@
   "created_at": "2026-06-27T12:00:00",
   "resolution": {
     "realized_outcome": false,
-    "resolved_at": "2026-07-02T08:35:24.833400",
-    "note": "June 2026 actual: +114K (BLS Employment Situation, released 2026-07-02). Below +150K threshold."
+    "resolved_at": "2026-07-02T15:37:21",
+    "note": "June 2026 actual: +57K (BLS Employment Situation, released 2026-07-02; CES levels Jun 158,984K - May 158,927K). Below +150K threshold. Corrected from +114K, an early wire misread recorded in v0.2.4 pre-release; outcome and scores unchanged."
   }
 }

@@ -4,6 +4,17 @@ All notable changes are documented here. This project follows
 [Semantic Versioning](https://semver.org/); before `1.0`, minor versions may
 introduce breaking changes.
 
+## [0.2.5] -- 2026-07-02
+
+### Fixed
+- **Corrected bet #1 recorded actual: +57K, not +114K.** The v0.2.4 grade was stamped hours
+  before the official BLS release and recorded the actual from an early wire read (+114K).
+  The official BLS print (CES total nonfarm, seasonally adjusted: Jun 158,984K - May 158,927K)
+  is **+57K**. The outcome is unchanged -- +57K is below the +150K threshold, so bet #1 stays
+  REFUTED and every Brier score stands (scores depend only on the binary outcome). This release
+  corrects the recorded actual in the example resolution and on the landing page, and re-stamps
+  the resolution after the official release.
+
 ## [0.2.4] -- 2026-07-02
 
 ### Changed

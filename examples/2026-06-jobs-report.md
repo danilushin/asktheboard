@@ -32,4 +32,4 @@ Pre-register a board call that the June 2026 US nonfarm payrolls report lands at
 - **Realized outcome:** FALSE
 - **Board Brier:** 0.314 (lower is better)
 - **Contrarian wins:** skeptic (dissented and beat the consensus)
-- **Note:** June 2026 actual: +114K (BLS Employment Situation, released 2026-07-02). Below +150K threshold.
+- **Note:** June 2026 actual: +57K (BLS Employment Situation, released 2026-07-02; CES levels Jun 158,984K - May 158,927K). Below +150K threshold. Corrected from +114K, an early wire misread recorded in v0.2.4 pre-release; outcome and scores unchanged.
