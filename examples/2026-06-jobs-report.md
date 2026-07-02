@@ -1,6 +1,6 @@
 # ADR-2026-06-jobs-report: Will the June 2026 US jobs report show nonfarm payroll growth of +150,000 or more?
 
-- **Status:** Pre-registered (resolves 2026-07-02)
+- **Status:** Resolved 2026-07-02 -- REFUTED
 - **Anchored:** 2026-06-27T12:00:00
 - **Resolution date:** 2026-07-02
 
@@ -21,8 +21,15 @@ Pre-register a board call that the June 2026 US nonfarm payrolls report lands at
 
 ## Board seats (dissent vector)
 
-| Seat | Stance | P(true) | Rationale |
-|---|---|---|---|
-| researcher | affirm | 60% | The consensus median for June nonfarm payrolls sits near 150-160k, and the trailing 3-month average is still above 150k after May's +172k. The central case clears the line -- but 2026's prints have been revised down repeatedly, which shaves the margin and is why this is a lean, not a lock. |
-| strategist | affirm | 58% | Second-order: the labor market has beaten nearly every cooling call this cycle, AI-capex buildout and healthcare hiring remain structurally strong, and a rate-cut-anticipation regime gives employers a reason to hold staff into expected easing rather than cut ahead of it. |
-| skeptic | dissent | 40% | 150k is the consensus median, which by definition puts roughly half the distribution below it -- this is a coin-flip dressed as a call. Summer seasonal softness plus a clear negative-revision trend make a sub-150k print the modal surprise. The board is anchoring on a round, legible number, not a real edge. |
+| Seat | Stance | P(true) | Brier | Rationale |
+|---|---|---|---|---|
+| researcher | affirm | 60% | 0.360 | The consensus median for June nonfarm payrolls sits near 150-160k, and the trailing 3-month average is still above 150k after May's +172k. The central case clears the line -- but 2026's prints have been revised down repeatedly, which shaves the margin and is why this is a lean, not a lock. |
+| strategist | affirm | 58% | 0.336 | Second-order: the labor market has beaten nearly every cooling call this cycle, AI-capex buildout and healthcare hiring remain structurally strong, and a rate-cut-anticipation regime gives employers a reason to hold staff into expected easing rather than cut ahead of it. |
+| skeptic | dissent | 40% | 0.160 | 150k is the consensus median, which by definition puts roughly half the distribution below it -- this is a coin-flip dressed as a call. Summer seasonal softness plus a clear negative-revision trend make a sub-150k print the modal surprise. The board is anchoring on a round, legible number, not a real edge. |
+
+## Resolution
+
+- **Realized outcome:** FALSE
+- **Board Brier:** 0.314 (lower is better)
+- **Contrarian wins:** skeptic (dissented and beat the consensus)
+- **Note:** June 2026 actual: +114K (BLS Employment Situation, released 2026-07-02). Below +150K threshold.

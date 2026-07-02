@@ -2,7 +2,6 @@
 <html lang="en">
 <head>
 <meta charset="utf-8">
-<link rel="icon" type="image/svg+xml" href="favicon.svg">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>ask-the-board &mdash; the board that keeps score, before the fact</title>
 <meta name="description" content="A board of expert personas whose every decision is a pre-registered, time-anchored, reality-graded bet. BYOK, zero runtime dependencies, MIT.">
@@ -131,23 +130,25 @@
 <section id="live-bet">
   <div class="wrap">
     <div class="waitlist" style="text-align:left">
-      <span class="pill">LIVE &middot; bet #1 of a public cadence</span>
-      <h2 style="margin-top:14px">The board's first public call &mdash; graded by reality on a fixed date</h2>
-      <p class="lead">Filed in the open, anchored in git, resolved on the date against a source
-        nobody controls. No edits after the anchor &mdash; that is the whole point.</p>
+      <span class="pill" style="background:#b91c1c">REFUTED &middot; bet #1 graded 2026-07-02</span>
+      <h2 style="margin-top:14px">The board's first public call &mdash; graded by reality</h2>
+      <p class="lead">Filed in the open, anchored in git, resolved against a source nobody controls.
+        No edits after the anchor &mdash; that is the whole point.</p>
       <p><b>Will the June 2026 US jobs report show +150,000 nonfarm payrolls or more?</b><br>
-        The board calls <b>yes at 56%</b>. Anchored <b>2026-06-27</b>; resolves <b>2026-07-02</b> against
-        the <a href="https://www.bls.gov/news.release/empsit.nr0.htm">BLS Employment Situation</a> release.</p>
+        The board called <b>yes at 56%</b>. Anchored <b>2026-06-27</b>; graded <b>2026-07-02</b> against
+        the <a href="https://www.bls.gov/news.release/empsit.nr0.htm">BLS Employment Situation</a> release.<br>
+        <b>Actual: +114K &mdash; below the +150K threshold. Outcome: FALSE.</b></p>
       <table class="board">
-        <thead><tr><th>seat</th><th>stance</th><th>P(+150k)</th><th>the call</th></tr></thead>
+        <thead><tr><th>seat</th><th>stance</th><th>P(+150k)</th><th>Brier</th><th>the call</th></tr></thead>
         <tbody>
-          <tr><td>researcher</td><td>affirm</td><td class="num">60%</td><td>central case clears the line; revisions shave the margin</td></tr>
-          <tr><td>strategist</td><td>affirm</td><td class="num">58%</td><td>labor market has beaten every cooling call this cycle</td></tr>
-          <tr><td>skeptic</td><td class="loss">dissent</td><td class="num">40%</td><td>150k is the median &mdash; a coin-flip dressed as a call</td></tr>
+          <tr><td>researcher</td><td>affirm</td><td class="num">60%</td><td class="num loss">0.360</td><td>central case clears the line; revisions shave the margin</td></tr>
+          <tr><td>strategist</td><td>affirm</td><td class="num">58%</td><td class="num loss">0.336</td><td>labor market has beaten every cooling call this cycle</td></tr>
+          <tr><td>skeptic</td><td class="win">dissent &#x2713;</td><td class="num">40%</td><td class="num win">0.160</td><td>150k is the median &mdash; a coin-flip dressed as a call</td></tr>
         </tbody>
       </table>
-      <p class="note"><b>Come back July 2 and watch it grade.</b> The board may turn out wrong, and the
-        git anchor means it cannot pretend otherwise. Full board-minute:
+      <p class="note"><b>The skeptic wins round 1.</b> The dissenter called the miss most accurately
+        (Brier 0.160 vs board average 0.314). The git anchor means the board cannot edit its pre-registered
+        call after the fact. Full board-minute:
         <a href="https://github.com/danilushin/asktheboard/blob/main/examples/2026-06-jobs-report.md">examples/2026-06-jobs-report.md</a>.</p>
     </div>
   </div>
@@ -187,14 +188,16 @@
     <table class="board">
       <thead><tr><th>seat</th><th>n</th><th>mean_brier</th><th>wins</th><th>losses</th></tr></thead>
       <tbody>
-        <tr><td>pragmatist</td><td class="num">1</td><td class="num">0.040</td><td class="num win">0</td><td class="num">0</td></tr>
-        <tr><td>skeptic</td><td class="num">1</td><td class="num">0.423</td><td class="num">0</td><td class="num loss">1</td></tr>
+        <tr><td>pragmatist</td><td class="num">1</td><td class="num">0.040</td><td class="num">0</td><td class="num">0</td></tr>
+        <tr><td>skeptic</td><td class="num">2</td><td class="num">0.291</td><td class="num win">1</td><td class="num loss">1</td></tr>
+        <tr><td>strategist</td><td class="num">1</td><td class="num">0.336</td><td class="num">0</td><td class="num">0</td></tr>
+        <tr><td>researcher</td><td class="num">1</td><td class="num">0.360</td><td class="num">0</td><td class="num">0</td></tr>
       </tbody>
     </table>
-    <p class="note">On a <em>real</em>, dated minute the same mechanic produces a
-      <em>contrarian win</em> &mdash; a seat that <b>dissents</b> and turns out
-      more right than the board. That&rsquo;s the gold the aged public scoreboard
-      is built from, once minutes resolve against reality you didn&rsquo;t set.</p>
+    <p class="note">The skeptic&rsquo;s Brier 0.160 on bet #1 (jobs report, June 2026) is a real
+      <em>contrarian win</em> &mdash; dissented, turned out more right than the board. That&rsquo;s the
+      gold the aged public scoreboard is built from, once minutes resolve against reality you
+      didn&rsquo;t set.</p>
   </div>
 </section>
 

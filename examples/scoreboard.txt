@@ -1,4 +1,6 @@
 seat               n  mean_brier  wins  losses
 ----------------------------------------------
 pragmatist         1       0.040     0       0
-skeptic            1       0.423     0       1
+skeptic            2       0.291     1       1
+strategist         1       0.336     0       0
+researcher         1       0.360     0       0

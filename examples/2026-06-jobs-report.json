@@ -29,5 +29,9 @@
     }
   ],
   "created_at": "2026-06-27T12:00:00",
-  "resolution": null
+  "resolution": {
+    "realized_outcome": false,
+    "resolved_at": "2026-07-02T08:35:24.833400",
+    "note": "June 2026 actual: +114K (BLS Employment Situation, released 2026-07-02). Below +150K threshold."
+  }
 }

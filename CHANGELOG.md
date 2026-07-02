@@ -4,6 +4,19 @@ All notable changes are documented here. This project follows
 [Semantic Versioning](https://semver.org/); before `1.0`, minor versions may
 introduce breaking changes.
 
+## [0.2.4] -- 2026-07-02
+
+### Changed
+- **Bet #1 resolved -- REFUTED.** June 2026 nonfarm payrolls came in at +114K (below the +150K
+  threshold). The board's 56% call was wrong; the skeptic's 40% dissent was most accurate
+  (Brier 0.160 vs board average 0.314). The skeptic earns round 1's contrarian win.
+- `examples/2026-06-jobs-report.json` and `.md` updated with resolution, realized outcome, and
+  per-seat Brier scores.
+- `examples/scoreboard.txt` regenerated: researcher/strategist added (their first resolved minute);
+  skeptic now 2 minutes, 1 contrarian win.
+- Landing page (`docs/index.html`): live-bet section updated from LIVE to REFUTED with outcome
+  and Brier scores; "See it keep score" scoreboard updated to reflect actual live bet results.
+
 ## [0.2.3] -- 2026-06-27
 
 ### Added
